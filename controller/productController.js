@@ -61,3 +61,27 @@ export const getAllProduct = async(req, res)=>{
     })
   }
 }
+
+export const getProductById = async (req, res)=>{
+  try {
+    const {id} = req.params;
+    // const singleProduct = await Product.findOne({_id:id})
+       const singleProduct = await Product.findById(id);
+       if(!singleProduct){
+        return res.json({
+          success:false,
+          message:"Product not found"
+        })
+       }
+
+       return res.json({
+        success:true,
+        singleProduct
+       })
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:"Internal server error"
+    })
+  }
+}

@@ -4,11 +4,11 @@ const auth = async (req, res, next)=>{
     try {
         const token = req.headers.authorization;
 
-            const decode = await jwt.verify(token, process.env.JWT_SECTET);
+            const decode =  jwt.verify(token, process.env.JWT_SECTET);
             if(!decode){
                 return res.json({
                     success:false,
-                    message:"invalid token"
+                    message:"Invalid token"
                 })
             } 
             req.auth = decode;
@@ -20,3 +20,5 @@ const auth = async (req, res, next)=>{
         })
     }
 }
+
+export default auth

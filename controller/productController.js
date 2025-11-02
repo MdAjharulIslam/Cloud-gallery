@@ -9,7 +9,7 @@ export const addProduct = async (req, res) => {
     if (!imageFile) {
       return res.json({
         success: false,
-        message: "Image not prodided",
+        message: "Image not provided",
       });
     }
 
@@ -40,3 +40,24 @@ export const addProduct = async (req, res) => {
 };
 
 
+export const getAllProduct = async(req, res)=>{
+  try {
+    const allProduct = await Product.find();
+    if(!allProduct || allProduct.length===0){
+      return res.json({
+        success:false,
+        message:"Not any product available"
+      })
+    }
+    
+    return res.json({
+      success:true,
+      allProduct
+    })
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:"Internal server error"
+    })
+  }
+}
